@@ -28,20 +28,19 @@ document.addEventListener('click', e => {
   }
 });
 
-// Photo carousel
-(function () {
-  const carousel = document.getElementById('gallery-carousel');
-  if (!carousel) return;
+// Photo carousels
+function initCarousel(carouselId) {
+  const carousel = document.getElementById(carouselId);
+  if (!carousel) return null;
 
-  const track  = carousel.querySelector('.carousel-track');
-  const slides = Array.from(carousel.querySelectorAll('.carousel-slide'));
-  const dotsEl = carousel.querySelector('.carousel-dots');
+  const track   = carousel.querySelector('.carousel-track');
+  const slides  = Array.from(carousel.querySelectorAll('.carousel-slide'));
+  const dotsEl  = carousel.querySelector('.carousel-dots');
   const btnPrev = carousel.querySelector('.carousel-btn-prev');
   const btnNext = carousel.querySelector('.carousel-btn-next');
 
   let current = 0;
 
-  // Build dots
   const dots = slides.map((_, i) => {
     const d = document.createElement('button');
     d.className = 'carousel-dot' + (i === 0 ? ' active' : '');
@@ -60,11 +59,25 @@ document.addEventListener('click', e => {
   btnPrev.addEventListener('click', () => goTo(current - 1));
   btnNext.addEventListener('click', () => goTo(current + 1));
 
-  document.addEventListener('keydown', e => {
-    if (e.key === 'ArrowLeft')  goTo(current - 1);
-    if (e.key === 'ArrowRight') goTo(current + 1);
+  return { prev: () => goTo(current - 1), next: () => goTo(current + 1) };
+}
+
+const farmCarousel   = initCarousel('gallery-carousel');
+const familyCarousel = initCarousel('family-carousel');
+
+// Keyboard nav follows the last-clicked carousel
+let activeCarousel = farmCarousel;
+['gallery-carousel', 'family-carousel'].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) el.addEventListener('click', () => {
+    activeCarousel = id === 'family-carousel' ? familyCarousel : farmCarousel;
   });
-})();
+});
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowLeft')  activeCarousel && activeCarousel.prev();
+  if (e.key === 'ArrowRight') activeCarousel && activeCarousel.next();
+});
 
 // Simple form submission feedback
 const form = document.querySelector('.contact-form');

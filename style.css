@@ -83,6 +83,13 @@ a:hover { text-decoration: underline; }
 .btn-full { width: 100%; }
 
 /* ── Section labels / headings ──────────────────────────────── */
+.section-divider {
+  border: none;
+  border-top: 1px solid var(--green);
+  margin: 0 auto;
+  width: 65%;
+}
+
 .section-label {
   display: block;
   font-size: 1.15rem;
@@ -314,12 +321,84 @@ h2.centered { text-align: center; }
   padding: 0;
   transition: background var(--transition), transform var(--transition);
 }
+.carousel-portrait {
+  max-width: 420px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.carousel-portrait .carousel-slide img {
+  height: 550px;
+  object-fit: cover;
+}
+
 .carousel-dot.active {
   background: var(--white);
   transform: scale(1.25);
 }
 
 /* ── Contact ────────────────────────────────────────────────── */
+/* ── Reviews ──────────────────────────────────────────────── */
+.reviews-section { background: var(--off-white, #f8f8f5); }
+
+.reviews-grid {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-top: 2.5rem;
+}
+
+.review-card {
+  width: 340px;
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.review-photo-wrap {
+  line-height: 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.review-card .review-photo {
+  width: 100%;
+  height: 450px;
+  object-fit: cover;
+  display: block;
+}
+
+.review-body {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.review-stars {
+  color: #e8a020;
+  font-size: 1.25rem;
+  letter-spacing: 0.1em;
+}
+
+.review-body blockquote {
+  margin: 0;
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--text, #333);
+}
+
+.review-author {
+  margin: 0;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--green, #3a7d44);
+}
+
+
 .contact-section { background: var(--white); }
 
 .contact-grid {
@@ -441,6 +520,7 @@ h2.centered { text-align: center; }
 
   /* gallery */
   .carousel-slide img { height: 320px; }
+  .carousel-portrait .carousel-slide img { height: 420px; }
 
   /* contact */
   .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
@@ -451,5 +531,6 @@ h2.centered { text-align: center; }
 
 @media (max-width: 480px) {
   .carousel-slide img { height: 220px; }
+  .carousel-portrait .carousel-slide img { height: 320px; }
   .stats-row { gap: 1.5rem; }
 }
