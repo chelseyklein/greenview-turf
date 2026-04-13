@@ -8,7 +8,12 @@ Plain HTML + CSS + vanilla JS — no build step, no dependencies.
 
 ## Local preview
 
-Open `index.html` in a browser, or run a simple dev server:
+Open `index.html` in a browser
+
+```bash
+open path/to/index.html
+```
+or run a simple dev server:
 
 ```bash
 npx serve .
